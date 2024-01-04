@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.LoginController">
+   <children>
+      <Button contentDisplay="CENTER" layoutX="226.0" layoutY="167.0" mnemonicParsing="false" onAction="#switchToHelloView" prefHeight="124.0" prefWidth="149.0" text="Log In" textOverrun="CLIP">
+         <font>
+            <Font size="27.0" />
+         </font></Button>
+      <TextField fx:id="loginText" layoutX="226.0" layoutY="71.0" promptText="login" text="login" />
+      <PasswordField fx:id="passwordText" layoutX="226.0" layoutY="108.0" promptText="password" text="password" />
+      <Label fx:id="loginLabel" layoutX="178.0" layoutY="75.0" text="Login" />
+      <Label fx:id="passwordLabel" layoutX="158.0" layoutY="112.0" text="Password" />
+   </children>
+</Pane>

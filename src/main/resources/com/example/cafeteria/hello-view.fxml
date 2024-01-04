@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.HelloController">
+   <children>
+      <Button layoutX="423.0" layoutY="154.0" mnemonicParsing="false" onAction="#switchToLoginView" prefHeight="77.0" prefWidth="115.0" text="Log Out" textAlignment="CENTER">
+         <font>
+            <Font name="Candara" size="20.0" />
+         </font></Button>
+      <Label fx:id="SummaryLabel" layoutX="480.0" layoutY="350.0" text="summaryLabel" />
+      <Label layoutX="414.0" layoutY="320.0" text="Your summary cost: " />
+      <ScrollPane fx:id="scrollPane" layoutX="14.0" layoutY="20.0" prefHeight="363.0" prefWidth="275.0">
+        <content>
+          <AnchorPane fx:id="anchorInScroll" minHeight="0.0" minWidth="0.0" prefHeight="1500.0" prefWidth="257.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.AdminPageController">
+   <children>
+      <Button fx:id="resetButton" layoutX="14.0" layoutY="159.0" mnemonicParsing="false" onAction="#reset" text="RESET" />
+      <Button layoutX="487.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchToLoginView" prefHeight="59.0" prefWidth="89.0" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="newUserButton" layoutX="175.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchToNewUser" prefHeight="44.0" prefWidth="106.0" text="New user" />
+      <Button fx:id="summaryButton" layoutX="228.0" layoutY="126.0" mnemonicParsing="false" onAction="#switchToSummaryView" prefHeight="90.0" prefWidth="145.0" text="Summary">
+         <font>
+            <Font size="23.0" />
+         </font></Button>
+      <Button fx:id="newItemButton" layoutX="247.0" layoutY="255.0" mnemonicParsing="false" onAction="#switchToNewItem" prefHeight="44.0" prefWidth="106.0" text="New Item" />
+      <Button layoutX="315.0" layoutY="327.0" mnemonicParsing="false" onAction="#switchToPasswordChange" prefHeight="44.0" prefWidth="116.0" text="Change password" />
+   </children>
+</AnchorPane>

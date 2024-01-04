@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.NewUserController">
+   <children>
+      <TextField fx:id="newLoginField" layoutX="226.0" layoutY="91.0" />
+      <TextField fx:id="newPasswordField" layoutX="226.0" layoutY="151.0" />
+      <Label layoutX="151.0" layoutY="89.0" text="Login">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Label layoutX="117.0" layoutY="149.0" text="Password">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+      <Button fx:id="acceptButton" layoutX="259.0" layoutY="207.0" mnemonicParsing="false" onAction="#createuser" prefHeight="46.0" prefWidth="84.0" text="Create">
+         <font>
+            <Font size="19.0" />
+         </font></Button>
+      <Button fx:id="backButton" layoutX="491.0" layoutY="340.0" mnemonicParsing="false" onAction="#switchAdmin" prefHeight="46.0" prefWidth="84.0" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
