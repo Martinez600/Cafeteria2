@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -21,21 +22,15 @@ public class changePasswordController {
     TextField newPassword1TF;
     @FXML
     TextField newPassword2TF;
+    @FXML
+    Button backButton;
 
 
     private Stage stage;
     private Scene scene;
 
-    // GOING BACK TO ADMIN VIEW
-    public void switchAdmin(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("admin-page-View.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
 
-    }
 
     //CHANGING PASSWORD IN DATABASE FOR EXISTING USER
     public void changePassword() throws SQLException {
@@ -48,7 +43,7 @@ public class changePasswordController {
 //GETTING DATA FROM DATABASE FROM USERS TABLE
             String url = "jdbc:mysql://db4free.net:3306/cafeteria";
             String username = "martinez600";
-            Connection connection = DriverManager.getConnection(url, username, "shelbyGT500#");
+            Connection connection = DriverManager.getConnection(url, username, "9a18aede");
 
         PreparedStatement checkUserStatement = connection.prepareStatement("SELECT * FROM workers WHERE Full_name = ?");
         checkUserStatement.setString(1, userNameToChange);
@@ -90,6 +85,15 @@ public class changePasswordController {
             alert.setContentText("fill text fields");
             alert.show();
         }
+
+    }
+
+
+    public void initialize(){
+        // GOING BACK TO ADMIN VIEW
+        backButton.setOnAction(event -> {
+            ConnectionController.changeScene(event,"admin-page-view.fxml");
+        });
 
     }
 

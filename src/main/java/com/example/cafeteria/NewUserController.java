@@ -16,9 +16,6 @@ import java.sql.*;
 
 public class NewUserController {
 
-    private Stage stage;
-    private Scene scene;
-
 
     @FXML
     Button acceptButton;
@@ -26,6 +23,8 @@ public class NewUserController {
     TextField newLoginField;
     @FXML
     TextField newPasswordField;
+    @FXML
+    Button backButton;
 
 
 //CREATING NEW USER IN DATABASAE
@@ -38,14 +37,14 @@ public class NewUserController {
 // CHECKING IF DATABASE CONTAINS USER WITH CHOSEN LOGIN
             String url = "jdbc:mysql://db4free.net:3306/cafeteria";
             String username = "martinez600";
-            Connection connection = DriverManager.getConnection(url, username, "shelbyGT500#");
+            Connection connection = DriverManager.getConnection(url, username, "9a18aede");
 
             PreparedStatement checkUserStatement = connection.prepareStatement("SELECT * FROM workers WHERE Full_name = ?");
             checkUserStatement.setString(1, newLogin);
             ResultSet checkUserResultSet = checkUserStatement.executeQuery();
 
 
-            if (checkUserResultSet.next()){
+            if (checkUserResultSet.next() || newLogin.equals("Admin")){
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("user already exists");
@@ -78,20 +77,12 @@ public class NewUserController {
 
     }
 
-//GOING BACK TO ADMIN PAGE. BACK BUTTON
-    public void switchAdmin(ActionEvent event) throws IOException {
 
-
-
-        Parent root = FXMLLoader.load(getClass().getResource("admin-page-View.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void initialize(){
+        // GOING BACK TO ADMIN VIEW
+        backButton.setOnAction(event -> {
+            ConnectionController.changeScene(event, "admin-page-view.fxml");
+        });
 
     }
-
-
-
-
 }

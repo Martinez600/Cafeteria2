@@ -19,23 +19,22 @@ import java.util.ArrayList;
 
 public class HelloController {
 
-
     @FXML
     private Label SummaryLabel;
     @FXML
-    ScrollPane scrollPane;
+    private ScrollPane scrollPane;
     @FXML
-    AnchorPane anchorInScroll;
+    private AnchorPane anchorInScroll;
+    @FXML
+    private Button logoutButton;
 
-
-
-
-    private Stage stage;
-    private Scene scene;
 
 // SETTING UI SPACE FOR BUTTONS
     double topAnchorLabel = 15;
     double topAnchorButton = 15;
+
+    private Stage stage;
+    private Scene scene;
 
     int buttonID = 1;
     int labelID = 1;
@@ -48,33 +47,26 @@ public class HelloController {
 
 
 
-// SQL DATABASE CONNECTION VARIABLES
-    String url = "jdbc:mysql://db4free.net:3306/cafeteria";
-    String username = "martinez600";
-    Connection connection = DriverManager.getConnection(url, username, "shelbyGT500#");
-
-
-
-
     public HelloController() throws SQLException {
 
-    }
-
-
-    // FUNCTION TO GO BACK TO LOGIN VIEW FOR "LOG OUT BUTTON"
-    public void switchToLoginView(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
 
     }
 
 
 
-// FUNCTION THAT AUTOMATICALLY COUNTS AND PRINTS ALL COSTS FOR THE CUSTOMER IN THE WINDOW WITH LABEL. DATABASE HAS TRIGGER THAT COUNTS "cost", AND THIS FUNCTION ONLY SUMS IT
+    // FUNCTION THAT AUTOMATICALLY COUNTS AND PRINTS ALL COSTS FOR THE CUSTOMER IN THE WINDOW WITH LABEL. DATABASE HAS TRIGGER THAT COUNTS "cost", AND THIS FUNCTION ONLY SUMS IT
     public void updateSumCost() throws SQLException {
+        Connection connection = null;
+        try {
+            String url = "jdbc:mysql://db4free.net:3306/cafeteria";
+            String username = "martinez600";
+            connection = DriverManager.getConnection(url, username, "9a18aede");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+
         PreparedStatement stmtSum = connection.prepareStatement("SELECT sum(cost) FROM balance WHERE Worker_ID = ?");
         stmtSum.setString(1, String.valueOf(clientID));
         ResultSet getCostsSum = stmtSum.executeQuery();
@@ -89,6 +81,15 @@ public class HelloController {
     //ADDING LABEL WITH INFORMATION FROM DATABASE ABOUT AMOUNT OF PRODUCTS CUSTOMER ORDERED. LABELS STORED IN ARRAY,
     // ID OF PRODUCT FROM DB CORRESPONDS WITH ARRAY ELEMENT
     private void addNewLabel() throws SQLException {
+        Connection connection = null;
+        try {
+            String url = "jdbc:mysql://db4free.net:3306/cafeteria";
+            String username = "martinez600";
+            connection = DriverManager.getConnection(url, username, "9a18aede");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
 
         //GETTING NAME OF PRODUCT FROM ID OF BUTTON CORRESPONDING TO IT
         PreparedStatement checkLabelAmount = connection.prepareStatement("SELECT Name FROM items where ID = ?");
@@ -130,7 +131,7 @@ public class HelloController {
 
 
 
-//CREATING NEW BUTTON, GIVING IT ID AND ADDING TO ARRAY OF BUTTONS (NAME FOR BUTTON TAKEN FROM ITEMS IN DATABASE, ID ORDER IN DB IS BUTTON ORDER IN ARRAY
+    //CREATING NEW BUTTON, GIVING IT ID AND ADDING TO ARRAY OF BUTTONS (NAME FOR BUTTON TAKEN FROM ITEMS IN DATABASE, ID ORDER IN DB IS BUTTON ORDER IN ARRAY
     private void addNewButton(String buttonLabel) throws SQLException {
         Button button = new Button(buttonLabel);
         AnchorPane.setTopAnchor(button, topAnchorButton);
@@ -151,10 +152,18 @@ public class HelloController {
 //ADDING ACTIONS TO CREATED BUTTONS, CALLING BY ID OR ARRAY ORDER
     private void addingActionsToButtons()throws SQLException{
 
+
+            String url = "jdbc:mysql://db4free.net:3306/cafeteria";
+            String username = "martinez600";
+            Connection connection = DriverManager.getConnection(url, username, "9a18aede");
+
+
+
         final int iFinal = i;
         final int buttonFinal = buttonID;
             //SETTING ACTION TO BUTTON IN ORDER FROM ARRAYS OF BUTTONS
-            buttons.get(iFinal).setOnAction(event -> {
+
+        buttons.get(iFinal).setOnAction(event -> {
 
 
                 //GETTING TEXT (NUMBERS OF ORDERS FOR THIS PRODUCT) FOR BUTTON FROM LABEL, ACCoRDING TO BUTTON NUMBER AND LABEL NUMBER IN ARRAY
@@ -206,20 +215,34 @@ public class HelloController {
         }
 
 
-
     // ORDER OF EVENTS ON STARTUP
     @FXML
     public void initialize() throws SQLException {
-        //GETTING USER LOGIN, FROM PREV PAGE BY CREATING INSTANCE OF LOGINCONTROLLER
-        LoginController loginController = new LoginController();
-        String login1 = loginController.getLogin();
+
+        logoutButton.setOnAction(event -> {
+            ConnectionController.changeScene(event, "login-view.fxml");
+        });
+
+
+        Connection connection = null;
+        try {
+            String url = "jdbc:mysql://db4free.net:3306/cafeteria";
+            String username = "martinez600";
+            connection = DriverManager.getConnection(url, username, "9a18aede");
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        //GETTING USER LOGIN, FROM ConnectionController
+        String login1 = ConnectionController.login;
+
 
         //CREATING CONNECTION TO DATABASE USING LOGIN RECEIVED FROM LOGINCONTROLLER
         PreparedStatement stmt = connection.prepareStatement("SELECT * FROM workers WHERE Full_name LIKE ?");
         stmt.setString(1, login1);
         ResultSet getClientIdResultSet = stmt.executeQuery();
 
-// GETTING USER ID FROM DB KNOWING HIS LOGIN
+        // GETTING USER ID FROM DB KNOWING HIS LOGIN
         while (getClientIdResultSet.next()) {
             String clientIDSTRING = getClientIdResultSet.getString("ID");
             clientID = Integer.parseInt(clientIDSTRING);
@@ -227,11 +250,12 @@ public class HelloController {
 
         // INITIALIZING USER COSTS AND SHOWING
         updateSumCost();
-// CALLING DATABESE FOR EXISTING ITEMS
+
+        // CALLING DATABESE FOR EXISTING ITEMS
         PreparedStatement stmtForButtons = connection.prepareStatement("SELECT * FROM items");
         ResultSet buttonsRS = stmtForButtons.executeQuery();
 
-// FOR EVERY EXISTING ITEM IN DB, CALLING FUNCTIONS IN ORDER TO:
+        // FOR EVERY EXISTING ITEM IN DB, CALLING FUNCTIONS IN ORDER TO:
         while (buttonsRS.next()){
             //GET NAME OF CURRENT ITEM, SO GENERATED BUTTONS ARE PROPERLY LABELED
             String itemName = buttonsRS.getString("Name");
@@ -245,6 +269,8 @@ public class HelloController {
             buttonID += 1;
         }
 
-
 }}
+
+
+
 

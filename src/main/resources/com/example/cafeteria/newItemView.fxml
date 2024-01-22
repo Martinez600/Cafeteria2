@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.NewItemController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.NewItemController">
    <children>
       <TextField fx:id="nameText" layoutX="226.0" layoutY="81.0" />
       <TextField fx:id="priceText" layoutX="226.0" layoutY="124.0" />
@@ -25,7 +25,7 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button fx:id="backToAdmin" layoutX="489.0" layoutY="334.0" mnemonicParsing="false" onAction="#switchAdmin" prefHeight="52.0" prefWidth="86.0" text="Back">
+      <Button fx:id="backButton" layoutX="489.0" layoutY="334.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="86.0" text="Back">
          <font>
             <Font size="25.0" />
          </font></Button>

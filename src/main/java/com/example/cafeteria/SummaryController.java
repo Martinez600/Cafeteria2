@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -18,15 +19,12 @@ import java.time.format.DateTimeFormatter;
 
 public class SummaryController {
 
-    private Stage stage;
-    private Scene scene;
 
     @FXML
     TextArea SummaryArea;
     @FXML
-    public void initialize() throws SQLException {
-        getSummary();
-    }
+    Button backButton;
+
 
     public void save() throws SQLException {
         LocalDateTime myDateObj = LocalDateTime.now();
@@ -35,7 +33,7 @@ public class SummaryController {
 
         String url = "jdbc:mysql://db4free.net:3306/cafeteria";
         String username = "martinez600";
-        Connection connection = DriverManager.getConnection(url, username, "shelbyGT500#");
+        Connection connection = DriverManager.getConnection(url, username, "9a18aede");
 
 //SAVING DATABASE TO FILE WITH CURRENT TIME NAME
         PreparedStatement fileStatement = connection.prepareStatement("SELECT Full_name, sum(cost) FROM workers, balance WHERE workers.ID = balance.Worker_ID group by Full_name INTO OUTFILE ?");
@@ -50,7 +48,7 @@ public class SummaryController {
 
         String url = "jdbc:mysql://db4free.net:3306/cafeteria";
         String username = "martinez600";
-        Connection connection = DriverManager.getConnection(url, username, "shelbyGT500#");
+        Connection connection = DriverManager.getConnection(url, username, "9a18aede");
 
         PreparedStatement getSummaryStatement = connection.prepareStatement("SELECT Full_name, sum(cost) FROM workers, balance where workers.ID = balance.Worker_ID group by Full_name");
 
@@ -66,19 +64,16 @@ public class SummaryController {
 
 
     }
-// GOING BACK TO ADMIN VIEW. FOR BACK BUTTON
-    public void switchAdmin(ActionEvent event) throws IOException {
 
+    @FXML
+    public void initialize() throws SQLException {
+        backButton.setOnAction(event -> {
+            ConnectionController.changeScene(event, "admin-page-view.fxml");
+        });
 
+        getSummary();
 
-        Parent root = FXMLLoader.load(getClass().getResource("admin-page-View.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
 
     }
-
-
 
 }

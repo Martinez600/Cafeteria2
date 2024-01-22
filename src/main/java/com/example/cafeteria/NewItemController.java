@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -16,8 +17,6 @@ import java.sql.*;
 
 public class NewItemController {
 
-    private Stage stage;
-    private Scene scene;
 
     @FXML
     TextField nameText;
@@ -25,6 +24,8 @@ public class NewItemController {
     TextField priceText;
     @FXML
     TextField stockText;
+    @FXML
+    Button backButton;
 
 
 // ADDING ITEM TO DATABASE WITH CHOSEN NAME, PRICE, STOCK
@@ -38,7 +39,7 @@ public class NewItemController {
 
             String url = "jdbc:mysql://db4free.net:3306/cafeteria";
             String username = "martinez600";
-            Connection connection = DriverManager.getConnection(url, username, "shelbyGT500#");
+            Connection connection = DriverManager.getConnection(url, username, "9a18aede");
 // GETTING ITEMS FROM DATABASE
             PreparedStatement checkUserStatement = connection.prepareStatement("SELECT * FROM items WHERE Name = ?");
             checkUserStatement.setString(1, name);
@@ -75,16 +76,11 @@ public class NewItemController {
 
     }
 
-//GOING BACK TO ADMIN VIEW
-    public void switchAdmin(ActionEvent event) throws IOException {
-
-
-
-        Parent root = FXMLLoader.load(getClass().getResource("admin-page-View.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void initialize(){
+        // GOING BACK TO ADMIN VIEW
+        backButton.setOnAction(event -> {
+            ConnectionController.changeScene(event, "admin-page-view.fxml");
+        });
 
     }
 }

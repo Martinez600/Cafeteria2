@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="HelloApplication (1)" type="Application" factoryName="Application" nameIsGenerated="true">
+    <option name="MAIN_CLASS_NAME" value="com.example.cafeteria.HelloApplication" />
+    <module name="Cafeteria" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.example.cafeteria.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

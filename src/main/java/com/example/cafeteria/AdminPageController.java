@@ -19,56 +19,19 @@ import java.util.Optional;
 
 public class AdminPageController {
 
-    private Stage stage;
-    private Scene scene;
+    @FXML
+    Button backButton;
+    @FXML
+    Button changePasswordButton;
+    @FXML
+    Button newUserButton;
+    @FXML
+    Button newItemButton;
+    @FXML
+    Button summaryButton;
 
 
     public AdminPageController() throws SQLException {
-    }
-
-    // FUNCTION TO GO BACK TO LOGIN, FOR BACK BUTTON
-    public void switchToLoginView(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-
-
-    // FUNCTION TO SWITCH TO CREATING NEW USER VIEW, FOR NEW USER BUTTON
-    public void switchToNewUser(ActionEvent event) throws IOException {
-
-
-
-        Parent root = FXMLLoader.load(getClass().getResource("newUserView.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
-    // FUNCTION TO SWITCH TO CREATING NEW ITEM VIEW, FOR NEW ITEM BUTTON
-    public void switchToNewItem(ActionEvent event) throws IOException{
-
-        Parent root = FXMLLoader.load(getClass().getResource("newItemView.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    // // FUNCTION TO SWITCH TO CHANGING USER PASSWORD VIEW, FOR CHANGE PASSWORD BUTTON
-    public void switchToPasswordChange(ActionEvent event) throws IOException{
-
-        Parent root = FXMLLoader.load(getClass().getResource("changePasswordView.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
     // FOR RESET BUTTON, TO ERESE DATA FROM DATABASE IN BALANCE TABLE, ERASING ORDERS (BUT SAVING TO FILE FIRST)
@@ -85,7 +48,7 @@ public class AdminPageController {
 
             String url = "jdbc:mysql://db4free.net:3306/cafeteria";
             String username = "martinez600";
-            Connection connection = DriverManager.getConnection(url, username, "shelbyGT500#");
+            Connection connection = DriverManager.getConnection(url, username, "9a18aede");
 
 //SAVING DATABASE TO FILE WITH CURRENT TIME NAME
             PreparedStatement fileStatement = connection.prepareStatement("SELECT Full_name, sum(cost) FROM workers, balance WHERE workers.ID = balance.Worker_ID group by Full_name INTO OUTFILE ?");
@@ -97,21 +60,36 @@ public class AdminPageController {
             resetStatement.executeUpdate();
             connection.close();
 
-        }else {return;}
-
+        }else {
+        }
 
 
     }
-// SWITCHING TO SUMMARY VIEW FOR SUM OF ORDERS PER CUSTOMER
-public void switchToSummaryView(ActionEvent event) throws SQLException, IOException {
+
+@FXML
+public void initialize(){
+         //FUNCTION TO GO BACK TO LOGIN, FOR BACK BUTTON
+    backButton.setOnAction(event -> {
+        ConnectionController.changeScene(event, "login-view.fxml");
+    });
+
+    changePasswordButton.setOnAction(event -> {
+        ConnectionController.changeScene(event, "changePasswordView.fxml");
+    });
+
+    newItemButton.setOnAction(event -> {
+        ConnectionController.changeScene(event, "newItemView.fxml");
+    });
 
 
+    newUserButton.setOnAction(event -> {
+        ConnectionController.changeScene(event, "newUserView.fxml");
+    });
 
-    Parent root = FXMLLoader.load(getClass().getResource("summaryView.fxml"));
-    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    scene = new Scene(root);
-    stage.setScene(scene);
-    stage.show();
+    summaryButton.setOnAction(event -> {
+        ConnectionController.changeScene(event, "summaryView.fxml");
+    });
+
 
 }
 

@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cafeteria.LoginController">
    <children>
-      <Button contentDisplay="CENTER" layoutX="226.0" layoutY="167.0" mnemonicParsing="false" onAction="#switchToHelloView" prefHeight="124.0" prefWidth="149.0" text="Log In" textOverrun="CLIP">
+      <Button fx:id="logInButton" contentDisplay="CENTER" layoutX="226.0" layoutY="167.0" mnemonicParsing="false" prefHeight="124.0" prefWidth="149.0" text="Log In" textOverrun="CLIP">
          <font>
             <Font size="27.0" />
          </font></Button>
