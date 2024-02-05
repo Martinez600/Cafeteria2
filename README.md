@@ -2,5 +2,5 @@ Simple JavaFx / MySQL project for company cafeteria. You can add users, items as
 Admin Admin are credentials for admin account.
 App is slow due to free MySQL hosting.
 
-https://we.tl/t-4Yw1P2iKsT
-link to executable app on wetransfer.
+https://drive.google.com/file/d/1fX35dZ0fjFoN1iG_5NOyxhZW6M3scxZf/view?usp=sharing
+link to executable app on google.
